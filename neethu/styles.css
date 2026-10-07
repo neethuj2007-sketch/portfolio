@@ -1,0 +1,4877 @@
+/* ===================================================================
+   PORTFOLIO DESIGN SYSTEM & STYLES
+   Modern, responsive, glassmorphism design with dark/light mode
+   =================================================================== */
+
+:root {
+  /* Midnight Neon Theme Colors (Default) */
+  --bg-primary: #030712;
+  --bg-secondary: rgba(6, 11, 25, 0.75);
+  --bg-card: rgba(10, 15, 33, 0.72);
+  --bg-card-hover: rgba(16, 24, 52, 0.85);
+  --bg-tag: rgba(0, 240, 255, 0.08);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --neon-cyan: #00f0ff;
+  --neon-pink: #ff007f;
+  --neon-purple: #a855f7;
+  --neon-emerald: #00ff9d;
+  --neon-gradient: linear-gradient(135deg, #00f0ff 0%, #c084fc 45%, #ff007f 100%);
+  
+  --accent-cyan: #00f0ff;
+  --accent-indigo: #818cf8;
+  --accent-emerald: #00ff9d;
+  --accent-gradient: var(--neon-gradient);
+  
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-neon: rgba(0, 240, 255, 0.35);
+  --border-accent: rgba(0, 240, 255, 0.35);
+  
+  --glow-color: rgba(0, 240, 255, 0.28);
+  
+  /* ===================================================================
+     CONSISTENT DESIGN TOKENS: CORNERS, SHADOWS, BLUR, AND TRANSITIONS
+     =================================================================== */
+
+  /* Consistent Rounded Corners: Establishes visual harmony across UI */
+  --radius-xs: 6px;       /* Chips, micro tags, status indicators */
+  --radius-sm: 8px;       /* Filter tabs, small buttons, input fields */
+  --radius-md: 12px;      /* Standard action buttons, HUD strips, cards */
+  --radius-lg: 18px;      /* Content cards: about, skills, timeline, projects */
+  --radius-xl: 22px;      /* Elevated containers: chat window, modal dialog */
+  --radius-full: 9999px;  /* Pills, avatar circles, round badges */
+
+  /* Consistent Drop Shadows: Creates clear visual depth and elevation hierarchy */
+  --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 10px 32px -6px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --shadow-card-hover: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 240, 255, 0.24), inset 0 1px 0 rgba(0, 240, 255, 0.3);
+  --shadow-btn: 0 4px 15px rgba(0, 240, 255, 0.3);
+  --shadow-btn-hover: 0 8px 25px rgba(0, 240, 255, 0.55), 0 0 15px rgba(0, 240, 255, 0.4);
+  --shadow-btn-secondary: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-btn-secondary-hover: 0 6px 20px rgba(0, 240, 255, 0.25), 0 0 12px rgba(0, 240, 255, 0.2);
+  --shadow-neon-cyan: 0 0 24px rgba(0, 240, 255, 0.35);
+  --shadow-neon-pink: 0 0 24px rgba(255, 0, 127, 0.35);
+
+  /* Background Blur Tokens: Multi-layered frosted glassmorphism hierarchy */
+  --blur-subtle: blur(8px);
+  --blur-card: blur(16px);
+  --blur-elevated: blur(24px);
+
+  /* Hover Transitions: Natural timing curves for tactile, responsive feel */
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-spring: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --header-height: 72px;
+}
+
+/* ===================================================================
+   DEFAULT BROWSER THEME DETECTION (CSS MEDIA QUERIES)
+   Automatically detects user's system/browser color-scheme setting
+   =================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #030712;
+    --bg-secondary: rgba(6, 11, 25, 0.75);
+    --bg-card: rgba(10, 15, 33, 0.72);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --neon-cyan: #00f0ff;
+    --neon-pink: #ff007f;
+    --border-neon: rgba(0, 240, 255, 0.35);
+    --glow-color: rgba(0, 240, 255, 0.28);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-primary: #f8fafc;
+    --bg-secondary: rgba(241, 245, 249, 0.75);
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --neon-cyan: #0284c7;
+    --neon-pink: #e11d48;
+    --border-neon: rgba(2, 132, 199, 0.3);
+    --glow-color: rgba(2, 132, 199, 0.2);
+    --shadow-subtle: 0 4px 14px rgba(15, 23, 42, 0.06);
+    --shadow-card: 0 10px 30px -6px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    --shadow-card-hover: 0 20px 40px -10px rgba(15, 23, 42, 0.16), 0 0 20px rgba(2, 132, 199, 0.2);
+    --shadow-btn: 0 4px 14px rgba(2, 132, 199, 0.25);
+    --shadow-btn-hover: 0 8px 22px rgba(2, 132, 199, 0.45);
+    --shadow-btn-secondary: 0 4px 12px rgba(15, 23, 42, 0.06);
+    --shadow-btn-secondary-hover: 0 6px 18px rgba(2, 132, 199, 0.2);
+  }
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: rgba(241, 245, 249, 0.75);
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: rgba(255, 255, 255, 0.96);
+  --bg-tag: rgba(14, 165, 233, 0.12);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-accent: rgba(14, 165, 233, 0.4);
+  --border-neon: rgba(14, 165, 233, 0.35);
+  
+  --neon-cyan: #0284c7;
+  --neon-pink: #e11d48;
+  --glow-color: rgba(14, 165, 233, 0.18);
+  --shadow-subtle: 0 4px 14px rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 10px 30px -6px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --shadow-card-hover: 0 20px 40px -10px rgba(15, 23, 42, 0.16), 0 0 20px rgba(2, 132, 199, 0.2);
+  --shadow-btn: 0 4px 14px rgba(2, 132, 199, 0.25);
+  --shadow-btn-hover: 0 8px 22px rgba(2, 132, 199, 0.45);
+  --shadow-btn-secondary: 0 4px 12px rgba(15, 23, 42, 0.06);
+  --shadow-btn-secondary-hover: 0 6px 18px rgba(2, 132, 199, 0.2);
+}
+
+[data-theme="dark"] {
+  --bg-primary: #030712;
+  --bg-secondary: rgba(6, 11, 25, 0.75);
+  --bg-card: rgba(10, 15, 33, 0.72);
+  --bg-card-hover: rgba(16, 24, 52, 0.85);
+  --bg-tag: rgba(0, 240, 255, 0.08);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --neon-cyan: #00f0ff;
+  --neon-pink: #ff007f;
+  --border-neon: rgba(0, 240, 255, 0.35);
+  --glow-color: rgba(0, 240, 255, 0.28);
+}
+
+/* CSS Reset & Base Rules */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+/* Fixed Neon Wave Background Image */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('abstract-flowing-neon-wave-background.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.88;
+  pointer-events: none;
+  z-index: -2;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* Contrast Enhancement Dark Overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 65% 35%, rgba(10, 14, 23, 0.42) 0%, rgba(10, 14, 23, 0.86) 100%);
+  pointer-events: none;
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
+/* Light Theme Adaptations for Neon Wave Background */
+[data-theme="light"] body::before {
+  opacity: 0.16;
+  filter: saturate(1.3) brightness(1.1);
+}
+
+[data-theme="light"] body::after {
+  background: radial-gradient(circle at 50% 30%, rgba(248, 250, 252, 0.68) 0%, rgba(248, 250, 252, 0.92) 100%);
+}
+
+/* Layout Container */
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 1.75rem);
+}
+
+/* Typography Utilities */
+.gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* ===================================================================
+   BACKGROUND BLUR & FROSTED GLASS SURFACES
+   Purpose: Multi-layered background blur (backdrop-filter) separates
+   foreground text and interactive controls from ambient neon wave
+   textures, ensuring high contrast, modern depth, and legibility.
+   =================================================================== */
+.site-header,
+.nav-menu,
+.nav-backdrop,
+.neon-hud-bar,
+.neon-status-pill,
+.neon-toggle-btn,
+.neon-metrics-row,
+.neon-chip,
+.neon-card-frame,
+.neon-avatar-badge,
+.about-profile-card,
+.about-profile-badge,
+.highlight-card,
+.about-stats-minimal,
+.skills-hud-strip,
+.pixel-skill-card,
+.pixel-category-badge,
+.timeline-card,
+.project-card,
+.project-thumbnail,
+.project-modal-card,
+.project-modal-backdrop,
+.testimonial-card,
+.chat-window-card,
+.message-bubble,
+.contact-form-wrapper,
+.detail-icon,
+.social-btn,
+.theme-toggle,
+.mobile-menu-toggle {
+  backdrop-filter: var(--blur-card);
+  -webkit-backdrop-filter: var(--blur-card);
+}
+
+/* Section Common Layout */
+.section {
+  padding: 6rem 0;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+/* ===================================================================
+   HEADER & NAVIGATION
+   - Sticky frosted glassmorphic navigation bar
+   - Subtle border separation and floating elevation drop shadow
+   =================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8, 12, 24, 0.85);
+  backdrop-filter: var(--blur-card);
+  -webkit-backdrop-filter: var(--blur-card);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Elevation drop shadow for sticky header */
+  transition: var(--transition-smooth);
+}
+
+[data-theme="light"] .site-header {
+  background: rgba(248, 250, 252, 0.85);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+}
+
+.header-container {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 
+  Brand Logo:
+  - Purpose: Engaging code-bracket logo with interactive hover lift
+  - Hover effect: Glides upward, illuminates neon brackets and slash
+*/
+.brand-logo {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.35rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.brand-logo:hover {
+  transform: translateY(-2px); /* Subtle hover lift */
+  text-shadow: 0 0 16px rgba(0, 240, 255, 0.45); /* Ambient logo glow */
+}
+
+.brand-logo:hover .code-bracket {
+  color: var(--neon-pink); /* Cybernetic bracket color shift on hover */
+  text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.brand-logo:hover .code-slash {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.code-bracket {
+  color: var(--accent-cyan);
+  transition: var(--transition-fast);
+}
+
+.code-slash {
+  color: var(--accent-indigo);
+  transition: var(--transition-fast);
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* 
+  Desktop Navigation Items:
+  - Purpose: Clear, tactile interactive visual feedback on hover/focus
+  - Hover effect: Soft frosted background tint, cyan text illumination,
+    and expanding neon bottom glow line
+*/
+.nav-link {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+  position: relative;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm); /* Consistent rounded corners */
+}
+
+/* Hover & Active indicator: Soft neon cyan background tint */
+.nav-link:hover,
+.nav-link.active {
+  color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.07);
+}
+
+/* Animated Expanding Neon Underline Effect */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan); /* Radiating underline glow */
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 70%; /* Smoothly expands from center outward */
+}
+
+/* Nav Backdrop Overlay */
+.nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.nav-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.mobile-nav-open {
+  overflow: hidden;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ===================================================================
+   THEME TOGGLE COMPONENT
+   Purpose: Tactile round switcher with smooth hover rotation and
+   ambient neon glow to signal interactive color theme state.
+   =================================================================== */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full); /* Perfectly circular rounded control */
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-subtle); /* Consistent subtle drop shadow */
+  transition: var(--transition-smooth);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px) rotate(15deg); /* Interactive hover lift & playful rotation */
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.35); /* Radiating hover glow */
+}
+
+.theme-toggle:active {
+  transform: translateY(0) scale(0.95); /* Responsive tactile click feel */
+}
+
+.theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  transition: transform 0.3s ease;
+}
+
+/* By default in dark mode: show sun (click to turn light) */
+[data-theme="dark"] .moon-icon {
+  display: none;
+}
+[data-theme="dark"] .sun-icon {
+  display: block;
+  color: #facc15;
+}
+
+/* In light mode: show moon (click to turn dark) */
+[data-theme="light"] .sun-icon {
+  display: none;
+}
+[data-theme="light"] .moon-icon {
+  display: block;
+  color: #6366f1;
+}
+
+/* 
+  Mobile Navigation Toggle Button:
+  - Purpose: Consistent rounded hamburger menu control with smooth hover lift
+  - Transitions into an animated 'X' when the vertical navbar opens
+*/
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); /* Consistent rounded corners */
+  cursor: pointer;
+  padding: 8px;
+  box-shadow: var(--shadow-subtle); /* Consistent drop shadow */
+  transition: var(--transition-smooth);
+  position: relative;
+  z-index: 105;
+}
+
+.mobile-menu-toggle:hover {
+  border-color: var(--neon-cyan);
+  transform: translateY(-2px); /* Subtle hover lift */
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+}
+
+.mobile-menu-toggle:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.hamburger-bar {
+  width: 22px;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.25s ease;
+  transform-origin: center;
+}
+
+/* Transform hamburger into 'X' when menu is open */
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(1),
+.mobile-menu-toggle.active .hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background-color: var(--neon-cyan);
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(2),
+.mobile-menu-toggle.active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(3),
+.mobile-menu-toggle.active .hamburger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background-color: var(--neon-cyan);
+}
+
+/* ===================================================================
+   BUTTONS & TAGS DESIGN SYSTEM
+   - Purpose: Unified button hierarchy with consistent rounded corners,
+     radiant drop shadows, hover lifts, and light-sheen reflections.
+   =================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm); /* Unified consistent rounded corners */
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden; /* Constrains the light shimmer reflection */
+  will-change: transform, box-shadow;
+}
+
+/* Subtle Light Sheen Reflection Effect across Buttons on Hover */
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-22deg);
+  transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.btn:hover::before {
+  left: 150%; /* Shimmer glides across button face on hover */
+}
+
+/* Tactile Active Press Feedback */
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Primary Button: Gradient face with ambient neon glow */
+.btn-primary {
+  background: var(--accent-gradient);
+  color: #0b0f19;
+  box-shadow: var(--shadow-btn); /* Consistent drop shadow */
+}
+
+.btn-primary:hover {
+  transform: translateY(-2.5px); /* Responsive upward glide */
+  box-shadow: var(--shadow-btn-hover); /* Expanded ambient neon drop shadow */
+  color: #0b0f19;
+}
+
+/* Secondary Button: Frosted surface with border glow */
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-btn-secondary); /* Consistent secondary drop shadow */
+  backdrop-filter: var(--blur-card);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2.5px);
+  color: var(--accent-cyan);
+  box-shadow: var(--shadow-btn-secondary-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-outline:hover {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* Tags & Micro Badges */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.3rem 0.65rem;
+  background: var(--bg-tag);
+  color: var(--accent-cyan);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-xs); /* Consistent micro rounded corner */
+  white-space: nowrap;
+  transition: var(--transition-fast);
+}
+
+.tag:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ===================================================================
+   1. HERO SECTION (MIDNIGHT NEON STYLE)
+   - Deep midnight obsidian backdrop with glowing cyan/magenta waves
+   - Sleek modern glassmorphism and radiant typography
+   - Ambient neon aura around character portrait
+   - High-contrast responsive layout
+   =================================================================== */
+
+.midnight-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 7.5rem 0 6rem 0;
+  border-bottom: 1px solid var(--border-neon);
+}
+
+/* Background Image Layer (abstract-flowing-neon-wave-background.jpg) */
+.neon-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: url('abstract-flowing-neon-wave-background.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  filter: contrast(1.18) saturate(1.25);
+  opacity: 0.85;
+  z-index: 0;
+  pointer-events: none;
+}
+
+[data-theme="light"] .neon-hero-backdrop {
+  opacity: 0.25;
+  filter: contrast(1.05) brightness(1.1);
+}
+
+/* Ambient Radial Neon Lighting */
+.neon-ambient-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 35%, rgba(255, 0, 127, 0.16) 0%, transparent 48%),
+              radial-gradient(circle at 20% 65%, rgba(0, 240, 255, 0.16) 0%, transparent 52%),
+              linear-gradient(to bottom, rgba(3, 7, 18, 0.2) 0%, rgba(3, 7, 18, 0.88) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="light"] .neon-ambient-glow {
+  background: radial-gradient(circle at 50% 30%, rgba(248, 250, 252, 0.6) 0%, rgba(248, 250, 252, 0.95) 100%);
+}
+
+.neon-hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+/* Midnight HUD Bar */
+.neon-hud-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.neon-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 1.1rem;
+  background: rgba(10, 15, 33, 0.75);
+  border: 1px solid var(--border-neon);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+}
+
+.neon-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--neon-emerald);
+  box-shadow: 0 0 10px var(--neon-emerald);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+.neon-status-text {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.neon-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.1rem;
+  background: rgba(10, 15, 33, 0.75);
+  border: 1px solid var(--border-neon);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  border-radius: 999px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(12px);
+}
+
+.neon-toggle-btn:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.neon-toggle-icon {
+  color: var(--neon-cyan);
+}
+
+.neon-mode-highlight {
+  color: var(--neon-cyan);
+}
+
+/* Headings */
+.neon-title {
+  font-size: 3.35rem;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+.neon-gradient-text {
+  background: var(--neon-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  text-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+}
+
+.neon-subhead {
+  display: block;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  margin-top: 0.35rem;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+}
+
+.neon-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+  max-width: 600px;
+}
+
+/* Metrics Row */
+.neon-metrics-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(10, 15, 33, 0.65);
+  border: 1px solid var(--border-neon);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  width: fit-content;
+  margin-bottom: 2.25rem;
+  backdrop-filter: blur(14px);
+}
+
+.neon-metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+.metric-lbl {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.neon-metric-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* CTA Group */
+.neon-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+/* 
+  Primary Neon CTA Button:
+  - Purpose: High-priority call to action with radiant drop shadow and shimmer
+  - Hover effect: Upward lift, expanded neon glow aura, and light sheen
+*/
+.btn-neon-primary {
+  background: var(--neon-gradient);
+  color: #030712;
+  font-weight: 700;
+  border-radius: var(--radius-sm); /* Consistent rounded corner */
+  box-shadow: var(--shadow-btn); /* Consistent drop shadow token */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.btn-neon-primary:hover {
+  transform: translateY(-2.5px); /* Responsive upward glide */
+  box-shadow: var(--shadow-btn-hover); /* Radiant neon glow aura */
+  color: #030712;
+}
+
+.btn-neon-primary:active {
+  transform: translateY(0) scale(0.98); /* Tactile click depression */
+}
+
+/* 
+  Secondary Neon CTA Button:
+  - Purpose: Secondary action with frosted glass background and subtle border glow
+*/
+.btn-neon-secondary {
+  background: rgba(10, 15, 33, 0.75);
+  color: var(--text-primary);
+  border: 1px solid var(--border-neon);
+  border-radius: var(--radius-sm); /* Consistent rounded corner */
+  box-shadow: var(--shadow-btn-secondary); /* Consistent drop shadow token */
+  backdrop-filter: var(--blur-card);
+  transition: var(--transition-smooth);
+}
+
+.btn-neon-secondary:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-btn-secondary-hover);
+  transform: translateY(-2.5px);
+  color: var(--neon-cyan);
+}
+
+.btn-neon-secondary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Tech Stack Chips */
+.neon-tech-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.neon-tech-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.neon-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.neon-chip {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(10, 15, 33, 0.75);
+  color: var(--neon-cyan);
+  border: 1px solid var(--border-neon);
+  border-radius: var(--radius-xs); /* Consistent micro rounded corner */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth);
+  backdrop-filter: var(--blur-subtle);
+}
+
+.neon-chip:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+/* ===================================================================
+   HERO AVATAR PORTRAIT & PARALLAX FLOATING EFFECTS
+   Purpose: Multi-layered floating animation that produces a dynamic
+   sense of depth, breathing ambient glow, and futuristic elegance.
+   =================================================================== */
+
+.neon-hero-visual {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* Subtle Ambient Floating Parallax Motion */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0.4deg);
+  }
+}
+
+.neon-avatar-wrapper {
+  position: relative;
+  width: 330px;
+  max-width: 100%;
+  animation: floatSlow 6s ease-in-out infinite; /* Continuous gentle floating parallax */
+  will-change: transform;
+}
+
+/* Ambient Radial Glow Ring with Breathing Pulse */
+.neon-glow-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: var(--radius-xl);
+  background: var(--neon-gradient);
+  filter: blur(28px);
+  opacity: 0.5;
+  z-index: 0;
+  animation: neon-ambient-pulse 4s infinite alternate ease-in-out;
+}
+
+@keyframes neon-ambient-pulse {
+  0% { opacity: 0.35; filter: blur(24px); }
+  100% { opacity: 0.65; filter: blur(34px); }
+}
+
+/* Framed Portrait Container with Consistent Drop Shadow */
+.neon-card-frame {
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius-xl); /* Consistent prominent rounded corners */
+  overflow: hidden;
+  background: rgba(10, 15, 33, 0.75);
+  border: 2px solid var(--border-neon);
+  box-shadow: var(--shadow-card), var(--shadow-neon-cyan); /* Dual elevation & neon shadow */
+  backdrop-filter: var(--blur-card);
+  transition: var(--transition-smooth);
+}
+
+.neon-card-frame:hover {
+  transform: scale(1.02);
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-card-hover), 0 0 35px rgba(0, 240, 255, 0.45);
+}
+
+.neon-avatar-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.neon-card-frame:hover .neon-avatar-image {
+  transform: scale(1.03);
+}
+
+/* Floating Status Pill over Portrait */
+.neon-avatar-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background: rgba(6, 11, 25, 0.85);
+  backdrop-filter: var(--blur-card);
+  border: 1px solid var(--border-neon);
+  box-shadow: var(--shadow-subtle), 0 0 16px rgba(0, 240, 255, 0.25);
+  border-radius: var(--radius-md); /* Consistent rounded corner */
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.neon-badge-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan);
+  animation: pulse-dot 1.8s infinite ease-in-out;
+}
+
+.neon-badge-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+/* ===================================================================
+   2. ABOUT SECTION (CLEAN & MINIMALISTIC)
+   =================================================================== */
+.about-section {
+  background-color: var(--bg-secondary);
+  position: relative;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.about-grid-minimal {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* 
+  Minimalist Profile Card:
+  - Purpose: Anchors the engineer biography with sticky position,
+    frosted glassmorphism, rounded corners, and radiant elevation shadow
+  - Hover effect: Upward lift and cyan border glow
+*/
+.about-profile-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-neon);
+  border-radius: var(--radius-lg); /* Consistent prominent rounded corners */
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card); /* Consistent drop shadow token */
+  backdrop-filter: var(--blur-card);
+  position: sticky;
+  top: calc(var(--header-height) + 2rem);
+  transition: var(--transition-smooth);
+}
+
+.about-profile-card:hover {
+  border-color: var(--neon-cyan);
+  transform: translateY(-4px); /* Hover elevation glide */
+  box-shadow: var(--shadow-card-hover); /* Expanded ambient neon shadow */
+}
+
+.about-image-wrapper {
+  position: relative;
+  border-radius: var(--radius-md); /* Consistent inner rounded corners */
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: #000;
+}
+
+.about-profile-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-profile-card:hover .about-profile-img {
+  transform: scale(1.03); /* Subtle image zoom on card hover */
+}
+
+.about-profile-badge {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  right: 0.85rem;
+  background: rgba(3, 7, 18, 0.85);
+  backdrop-filter: var(--blur-card);
+  border: 1px solid var(--border-neon);
+  border-radius: var(--radius-full); /* Circular pill badge */
+  padding: 0.45rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-subtle);
+}
+
+[data-theme="light"] .about-profile-badge {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--neon-emerald);
+  box-shadow: 0 0 8px var(--neon-emerald);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+.badge-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.about-meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+}
+
+.about-meta-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+}
+
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meta-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.text-accent {
+  color: var(--neon-cyan);
+}
+
+.about-card-actions {
+  margin-top: 1rem;
+}
+
+.btn-sm {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.88rem;
+}
+
+/* Right Content Column */
+.about-content-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-bio-card {
+  margin-bottom: 2rem;
+}
+
+.about-greeting {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.about-bio-lead {
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.about-bio-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* Career Highlights & Interests Split */
+.about-cards-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.25rem;
+}
+
+/* 
+  Highlight Cards:
+  - Purpose: Compact categorized highlights with frosted background blur
+  - Hover effect: Upward lift, border neon illumination, and expanded shadow
+*/
+.highlight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); /* Consistent rounded corner */
+  padding: 1.6rem;
+  box-shadow: var(--shadow-card); /* Consistent drop shadow */
+  backdrop-filter: var(--blur-card);
+  transition: var(--transition-smooth);
+}
+
+.highlight-card:hover {
+  border-color: var(--neon-cyan);
+  transform: translateY(-3.5px); /* Tactile hover lift */
+  box-shadow: var(--shadow-card-hover); /* Radiant neon shadow */
+}
+
+.highlight-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.highlight-icon {
+  font-size: 1.3rem;
+  transition: transform 0.25s ease;
+}
+
+.highlight-card:hover .highlight-icon {
+  transform: scale(1.15) rotate(5deg); /* Interactive micro-motion on hover */
+}
+
+.highlight-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.highlight-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.highlight-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.highlight-bullet {
+  color: var(--neon-cyan);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Minimalist Stats Strip with Glassmorphism & Shadow */
+.about-stats-minimal {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); /* Consistent rounded corners */
+  padding: 1.25rem 2rem;
+  backdrop-filter: var(--blur-card);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.about-stats-minimal:hover {
+  border-color: var(--border-neon);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.minimal-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.minimal-stat-num {
+  font-family: var(--font-mono);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.minimal-stat-lbl {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-subtle);
+}
+
+/* ===================================================================
+   3. SKILLS SECTION (PIXEL ART & MIDNIGHT NEON)
+   =================================================================== */
+
+.pixel-font-accent {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+/* Category Filter Tabs */
+.skills-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+/* 
+  Category Filter Tabs:
+  - Purpose: Tactile filter switcher with consistent rounded corners,
+    drop shadow, and hover lift
+*/
+.skills-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.skill-filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm); /* Consistent rounded corner */
+  background: rgba(10, 16, 32, 0.7);
+  border: 2px solid rgba(0, 240, 255, 0.2);
+  color: var(--text-secondary);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Consistent drop shadow */
+  transition: var(--transition-smooth);
+  outline: none;
+}
+
+.skill-filter-btn:hover {
+  border-color: var(--neon-cyan);
+  color: var(--text-primary);
+  transform: translateY(-2px); /* Hover lift feedback */
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35); /* Neon hover glow */
+}
+
+.skill-filter-btn.active {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  transform: translateY(0);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.45), inset 0 0 8px rgba(0, 240, 255, 0.2);
+}
+
+/* Retro Skills Status HUD Strip with Frosted Glass & Shadow */
+.skills-hud-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: rgba(8, 12, 24, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: var(--radius-md); /* Consistent rounded corners */
+  padding: 0.75rem 1.4rem;
+  margin-bottom: 2.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-subtle), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: var(--blur-card);
+}
+
+.hud-status-node {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hud-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon-emerald);
+  box-shadow: 0 0 8px var(--neon-emerald);
+  animation: hudPulse 2s infinite ease-in-out;
+}
+
+@keyframes hudPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.text-neon-cyan { color: var(--neon-cyan); }
+.text-neon-pink { color: var(--neon-pink); }
+.text-neon-yellow { color: #facc15; }
+
+/* Grid Layout */
+.pixel-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 960px) {
+  .pixel-skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 
+  Pixel Card Container:
+  - Purpose: Frosted glass card with rounded corners and radiant neon shadow
+  - Hover effect: Upward lift, border illumination, and expanded neon shadow
+*/
+.pixel-skill-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  border-radius: var(--radius-lg); /* Consistent card rounded corner */
+  padding: 1.85rem;
+  box-shadow: var(--shadow-card); /* Consistent drop shadow token */
+  backdrop-filter: var(--blur-card);
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.pixel-skill-card:hover {
+  transform: translateY(-5px); /* Smooth hover lift */
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-card-hover); /* Expanded ambient neon shadow */
+}
+
+.pixel-skill-card.is-filtered-out {
+  display: none;
+}
+
+/* Category Header inside Skill Card */
+.pixel-skill-card .category-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.2);
+}
+
+.pixel-category-badge {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 6px;
+  box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.15);
+}
+
+.category-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.category-subtitle {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+/* Skill Rows List */
+.pixel-skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.pixel-skill-row {
+  padding: 0.8rem 0.95rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.015);
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.pixel-skill-row:hover,
+.pixel-skill-row:focus-visible {
+  background: rgba(0, 240, 255, 0.05);
+  border-color: rgba(0, 240, 255, 0.4);
+  transform: translateX(4px);
+  box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.06);
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.skill-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pixel-skill-icon {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 2px;
+  border: 1px solid var(--border-neon);
+  box-shadow: 1px 1px 0 #000;
+  letter-spacing: 0.02em;
+}
+
+.icon-cyan {
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.12);
+}
+
+.icon-yellow {
+  color: #facc15;
+  border-color: #facc15;
+  background: rgba(250, 204, 21, 0.12);
+}
+
+.icon-emerald {
+  color: var(--neon-emerald);
+  border-color: var(--neon-emerald);
+  background: rgba(0, 255, 157, 0.12);
+}
+
+.icon-pink {
+  color: var(--neon-pink);
+  border-color: var(--neon-pink);
+  background: rgba(255, 0, 127, 0.12);
+}
+
+.icon-indigo {
+  color: #a78bfa;
+  border-color: #a78bfa;
+  background: rgba(167, 139, 250, 0.12);
+}
+
+.skill-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.skill-lvl-tag {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.62rem;
+  color: var(--neon-pink);
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 6px rgba(255, 0, 127, 0.45);
+}
+
+/* 8-Bit Pixel Art Stepped Progress Bar */
+.pixel-bar-container {
+  height: 14px;
+  position: relative;
+  background: #040814;
+  border: 2px solid #16203a;
+  border-radius: 2px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.pixel-bar-fill {
+  height: 100%;
+  width: var(--skill-pct, 0%);
+  background-image: 
+    linear-gradient(90deg, #00f0ff 0%, #a855f7 60%, #ff007f 100%),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 6px, #040814 6px, #040814 8px);
+  background-size: 100% 100%, 8px 100%;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+
+.pixel-skill-row:hover .pixel-bar-fill,
+.pixel-skill-row:focus-visible .pixel-bar-fill {
+  box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 240, 255, 0.45);
+  filter: brightness(1.2);
+}
+
+.skill-competency-desc {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  margin-top: 0.45rem;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+
+.pixel-skill-row:hover .skill-competency-desc {
+  color: var(--text-secondary);
+}
+
+
+/* ===================================================================
+   4. TIMELINE / EXPERIENCE SECTION (ROUNDED CARDS & SMOOTH TRANSITIONS)
+   =================================================================== */
+
+.timeline-section {
+  position: relative;
+}
+
+/* Interactive Timeline Category Filter */
+.timeline-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.75rem;
+}
+
+.timeline-filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm); /* Consistent rounded corners */
+  background: rgba(10, 16, 32, 0.7);
+  border: 2px solid rgba(0, 240, 255, 0.2);
+  color: var(--text-secondary);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Consistent drop shadow */
+  transition: var(--transition-smooth);
+  outline: none;
+}
+
+.timeline-filter-btn:hover {
+  border-color: var(--neon-cyan);
+  color: var(--text-primary);
+  transform: translateY(-2px); /* Hover lift feedback */
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35); /* Radiating hover glow */
+}
+
+.timeline-filter-btn.active {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  transform: translateY(0);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.45), inset 0 0 8px rgba(0, 240, 255, 0.2);
+}
+
+/* Timeline Layout */
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Glowing Neon Vertical Spine */
+.timeline-spine {
+  position: absolute;
+  left: 23px;
+  top: 15px;
+  bottom: 20px;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--neon-cyan) 0%, #a855f7 50%, var(--neon-pink) 100%);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+  opacity: 0.65;
+  border-radius: 3px;
+}
+
+.timeline-track {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.75rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-item.is-filtered-out {
+  display: none;
+}
+
+/* Node Marker Container with Hover Scale Transition */
+.timeline-marker-wrapper {
+  position: relative;
+  width: 48px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 1.6rem;
+  z-index: 2;
+}
+
+.timeline-marker {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+  border: 3px solid var(--neon-cyan);
+  box-shadow: 0 0 12px var(--neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-bounce);
+}
+
+.marker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--neon-cyan);
+  transition: var(--transition-fast);
+}
+
+.marker-career {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 12px var(--neon-cyan);
+}
+.marker-career .marker-dot {
+  background: var(--neon-cyan);
+}
+
+.marker-project {
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 12px var(--neon-pink);
+}
+.marker-project .marker-dot {
+  background: var(--neon-pink);
+}
+
+.marker-education {
+  border-color: #a855f7;
+  box-shadow: 0 0 12px #a855f7;
+}
+.marker-education .marker-dot {
+  background: #a855f7;
+}
+
+/* Hover effect on marker when item is hovered */
+.timeline-item:hover .timeline-marker {
+  transform: scale(1.35); /* Micro-interaction scale on card hover */
+}
+.timeline-item:hover .marker-career {
+  box-shadow: 0 0 20px var(--neon-cyan), 0 0 35px rgba(0, 240, 255, 0.5);
+}
+.timeline-item:hover .marker-project {
+  box-shadow: 0 0 20px var(--neon-pink), 0 0 35px rgba(255, 0, 127, 0.5);
+}
+.timeline-item:hover .marker-education {
+  box-shadow: 0 0 20px #a855f7, 0 0 35px rgba(168, 85, 247, 0.5);
+}
+
+/* 
+  Timeline Content Cards:
+  - Purpose: Rounded container with frosted glassmorphism and elevation shadow
+  - Hover effect: Upward lift, border illumination, and expanded neon shadow
+*/
+.timeline-card {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); /* Consistent prominent rounded corners */
+  padding: 2rem 2.25rem;
+  box-shadow: var(--shadow-card); /* Consistent drop shadow token */
+  backdrop-filter: var(--blur-card);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth); /* Smooth hover transitions */
+}
+
+/* Smooth Hover Effect on Timeline Card */
+.timeline-card:hover,
+.timeline-item:hover .timeline-card {
+  transform: translateY(-5px); /* Tactile hover lift */
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-card-hover); /* Expanded radiant shadow */
+}
+
+/* Card Metadata Strip */
+.timeline-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.timeline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.32rem 0.8rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.badge-career {
+  background: rgba(0, 240, 255, 0.12);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.badge-project {
+  background: rgba(255, 0, 127, 0.12);
+  color: var(--neon-pink);
+  border: 1px solid rgba(255, 0, 127, 0.3);
+}
+
+.badge-education {
+  background: rgba(168, 85, 247, 0.12);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.timeline-timestamp {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-tag);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Card Header */
+.timeline-card-header {
+  margin-bottom: 1rem;
+}
+
+.timeline-role {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.3rem;
+  transition: color 0.2s ease;
+}
+
+.timeline-card:hover .timeline-role {
+  color: #ffffff;
+}
+
+.timeline-company {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--neon-cyan);
+}
+
+.timeline-desc {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+/* Achievements Pills Strip */
+.timeline-achievements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.achievement-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.timeline-card:hover .achievement-pill {
+  border-color: rgba(0, 240, 255, 0.2);
+  background: rgba(0, 240, 255, 0.04);
+}
+
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Light Theme Styling for Timeline & Skills */
+[data-theme="light"] .skill-filter-btn,
+[data-theme="light"] .timeline-filter-btn {
+  background: rgba(241, 245, 249, 0.9);
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+[data-theme="light"] .skill-filter-btn.active,
+[data-theme="light"] .timeline-filter-btn.active {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: #0284c7;
+  color: #0284c7;
+}
+
+[data-theme="light"] .skills-hud-strip {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(2, 132, 199, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .pixel-skill-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(2, 132, 199, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 4px 4px 0px rgba(2, 132, 199, 0.12);
+}
+
+[data-theme="light"] .pixel-bar-container {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .pixel-bar-fill {
+  background-image: 
+    linear-gradient(90deg, #0284c7 0%, #7c3aed 60%, #e11d48 100%),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 6px, #e2e8f0 6px, #e2e8f0 8px);
+}
+
+[data-theme="light"] .timeline-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .timeline-card:hover {
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 20px 35px -12px rgba(2, 132, 199, 0.2);
+}
+
+[data-theme="light"] .achievement-pill {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+@media (max-width: 640px) {
+  .timeline-spine {
+    left: 16px;
+  }
+
+  .timeline-marker-wrapper {
+    width: 34px;
+  }
+
+  .timeline-marker {
+    width: 18px;
+    height: 18px;
+  }
+
+  .timeline-item {
+    gap: 1rem;
+  }
+
+  .timeline-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .timeline-role {
+    font-size: 1.15rem;
+  }
+}
+
+/* ===================================================================
+   5. PROJECTS SECTION
+   =================================================================== */
+/* ===================================================================
+   5. PROJECTS SECTION (CLICKABLE THUMBNAILS & DETAILED VIEWS)
+   =================================================================== */
+
+/* ===================================================================
+   5. PROJECTS SECTION (INTERACTIVE CARDS, BLUR & DROP SHADOW EFFECTS)
+   =================================================================== */
+
+/* Interactive Category Filter Tabs: Centered tactile filter pills */
+.projects-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.75rem;
+}
+
+/* Category Filter Button
+   - Rounded corners: var(--radius-sm) (8px) for compact control buttons
+   - Drop shadow: subtle elevation separating button from background
+   - Hover transition: fast smooth lift with neon glow border */
+.project-filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm); /* Consistent 8px rounded corners */
+  background: rgba(10, 16, 32, 0.7);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--text-secondary);
+  cursor: pointer;
+  box-shadow: var(--shadow-btn-secondary); /* Consistent drop shadow */
+  transition: var(--transition-smooth); /* Smooth hover transition */
+  outline: none;
+  backdrop-filter: var(--blur-subtle); /* Frosted glass effect */
+  -webkit-backdrop-filter: var(--blur-subtle);
+}
+
+.project-filter-btn:hover {
+  border-color: var(--neon-cyan);
+  color: var(--text-primary);
+  transform: translateY(-2px); /* Tactile lift effect */
+  box-shadow: var(--shadow-btn-secondary-hover); /* Expanded ambient glow */
+}
+
+.project-filter-btn.active {
+  background: rgba(0, 240, 255, 0.16);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Projects Grid Layout: Responsive auto-fitting grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 2rem;
+}
+
+/* Individual Project Card Container
+   - Rounded corners: var(--radius-lg) (18px) for major content cards
+   - Background blur: multi-layer frosted glass hierarchy filtering background glows
+   - Drop shadow: deep ambient shadow creating elevated 3D plane
+   - Hover transition: smooth upward translation + expanded cyan aura */
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); /* Consistent 18px rounded corners */
+  padding: 1.6rem;
+  box-shadow: var(--shadow-card); /* Consistent drop shadow for cards */
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: var(--blur-card); /* Background blur for frosted glassmorphism */
+  -webkit-backdrop-filter: var(--blur-card);
+  position: relative;
+  transition: var(--transition-smooth); /* Smooth hover transition */
+}
+
+.project-card:hover {
+  border-color: var(--border-neon);
+  transform: translateY(-6px); /* Floating lift effect */
+  box-shadow: var(--shadow-card-hover); /* Expanded shadow with cyan neon glow */
+}
+
+.project-card.is-filtered-out {
+  display: none;
+}
+
+/* ===================================================================
+   PROJECT THUMBNAIL COMPONENT (PARALLAX ZOOM & DROP SHADOW FX)
+   =================================================================== */
+
+.project-thumbnail-wrapper {
+  margin-bottom: 1.35rem; /* Consistent bottom rhythm */
+  width: 100%;
+}
+
+/* Project Thumbnail Frame
+   - Rounded corners: var(--radius-md) (12px)
+   - Drop shadow: inset depth + subtle base drop shadow
+   - Hover transition: smooth border brightening and glow */
+.project-thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 10; /* Fixed aspect ratio prevents cumulative layout shifts */
+  border-radius: var(--radius-md); /* Consistent 12px rounded corners */
+  overflow: hidden;
+  position: relative;
+  background: #040714;
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  cursor: pointer;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8), var(--shadow-subtle); /* Drop shadow with inner depth */
+  transition: var(--transition-smooth); /* Smooth hover transition */
+  outline: none;
+}
+
+/* Thumbnail Hover Glow & Parallax Scaling Effect:
+   Simulates 3D lens magnification inside the card viewport */
+.project-thumbnail:hover,
+.project-thumbnail:focus-visible {
+  border-color: var(--neon-cyan);
+  box-shadow: inset 0 0 14px rgba(0, 240, 255, 0.2), 0 0 24px rgba(0, 240, 255, 0.35); /* Cyber glow */
+}
+
+.project-thumbnail:hover .thumbnail-canvas,
+.project-thumbnail:focus-visible .thumbnail-canvas {
+  transform: scale(1.05); /* Parallax scale zoom transition */
+}
+
+.project-thumbnail:hover .thumbnail-overlay,
+.project-thumbnail:focus-visible .thumbnail-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Inner Thumbnail Canvas with Mock Graphic Layouts */
+.thumbnail-canvas {
+  width: 100%;
+  height: 100%;
+  padding: 1rem 1.15rem; /* Consistent internal padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(8, 14, 30, 0.95) 0%, rgba(3, 7, 18, 0.98) 100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+/* Retro Window Bar for Thumbnails */
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.terminal-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.dot-red { background: #ef4444; }
+.dot-yellow { background: #eab308; }
+.dot-green { background: #22c55e; }
+
+.terminal-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-left: 0.4rem;
+}
+
+/* Metric / Sparkline Mockups */
+.thumbnail-metric-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: auto 0;
+}
+
+.mock-chart-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 48px;
+  padding: 0 4px;
+}
+
+.chart-spark {
+  flex: 1;
+  height: var(--h, 50%);
+  background: linear-gradient(to top, rgba(0, 240, 255, 0.2), var(--neon-cyan));
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+  transition: height 0.3s ease;
+}
+
+.mock-badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--neon-emerald);
+  letter-spacing: 0.04em;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--neon-emerald);
+  box-shadow: 0 0 6px var(--neon-emerald);
+  animation: hudPulse 1.8s infinite ease-in-out;
+}
+
+/* Stream Nodes Mockup */
+.thumbnail-stream-nodes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: auto 0;
+  flex-wrap: wrap;
+}
+
+.stream-node {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(255, 0, 127, 0.12);
+  border: 1px solid var(--neon-pink);
+  color: var(--neon-pink);
+  box-shadow: 0 0 8px rgba(255, 0, 127, 0.3);
+}
+
+.node-broker {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+.stream-arrow {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+.stream-stat-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  letter-spacing: 0.03em;
+}
+.badge-green { color: var(--neon-emerald); }
+.badge-cyan { color: var(--neon-cyan); }
+
+/* Canvas Grid Mockup */
+.canvas-grid-preview {
+  position: relative;
+  height: 52px;
+  margin: auto 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 14px 14px;
+  border-radius: 4px;
+}
+
+.mock-cursor {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.cursor-cyan { left: 15%; top: 20%; }
+.cursor-pink { right: 25%; bottom: 15%; }
+
+.cursor-pointer {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 9px solid var(--neon-cyan);
+  transform: rotate(-35deg);
+}
+.cursor-pink .cursor-pointer {
+  border-bottom-color: var(--neon-pink);
+}
+
+.cursor-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  padding: 1px 4px;
+  border-radius: 2px;
+  background: var(--neon-cyan);
+  color: #030712;
+  font-weight: 700;
+}
+.cursor-pink .cursor-label {
+  background: var(--neon-pink);
+}
+
+/* CLI Body Mockup */
+.terminal-cli-body {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cli-line {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--text-secondary);
+}
+.cli-prompt { color: var(--neon-pink); font-weight: 800; }
+.text-cyan { color: var(--neon-cyan); }
+.text-emerald { color: var(--neon-emerald); }
+.text-yellow { color: #facc15; }
+
+/* KPI Hub Mockup */
+.kpi-metric-strip {
+  display: flex;
+  justify-content: space-around;
+  margin: auto 0;
+}
+
+.kpi-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kpi-num {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.kpi-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+}
+
+/* Auth Security Mockup */
+.auth-security-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: auto 0;
+  background: rgba(0, 255, 157, 0.05);
+  border: 1px dashed rgba(0, 255, 157, 0.3);
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+}
+
+.security-shield-icon {
+  font-size: 1.3rem;
+}
+
+.security-token-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.token-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--neon-emerald);
+}
+
+.token-hash {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-primary);
+}
+
+/* Hover Overlay on Thumbnail */
+.thumbnail-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 5;
+}
+
+.thumbnail-inspect-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid var(--neon-cyan);
+  padding: 0.55rem 1.15rem;
+  border-radius: 6px;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
+  transform: translateY(4px);
+  transition: transform 0.25s ease, background 0.2s ease;
+}
+
+.project-thumbnail:hover .thumbnail-inspect-btn {
+  transform: translateY(0);
+}
+
+/* Project Card Header & Metadata */
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.project-type-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-cyan {
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.badge-pink {
+  background: rgba(255, 0, 127, 0.1);
+  color: var(--neon-pink);
+  border: 1px solid rgba(255, 0, 127, 0.3);
+}
+
+.badge-emerald {
+  background: rgba(0, 255, 157, 0.1);
+  color: var(--neon-emerald);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+}
+
+.badge-yellow {
+  background: rgba(250, 204, 21, 0.1);
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.3);
+}
+
+.badge-purple {
+  background: rgba(168, 85, 247, 0.1);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.icon-link {
+  color: var(--text-secondary);
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon-link:hover {
+  color: var(--neon-cyan);
+  transform: translateY(-2px);
+}
+
+.project-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.project-card:hover .project-title {
+  color: #ffffff;
+}
+
+.project-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.project-metric-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.15rem;
+}
+
+.project-metric-item {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Project Action Button: Primary inspection trigger
+   - Rounded corners: var(--radius-sm) (8px)
+   - Drop shadow: subtle glow defining interactive element
+   - Hover transition: smooth upward translate with brightened cyan glow */
+.project-action-btn {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.7rem 1.15rem;
+  border-radius: var(--radius-sm); /* Consistent 8px rounded corners */
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: var(--neon-cyan);
+  cursor: pointer;
+  box-shadow: var(--shadow-btn-secondary); /* Consistent drop shadow */
+  transition: var(--transition-smooth); /* Smooth hover transition */
+  outline: none;
+  backdrop-filter: var(--blur-subtle);
+  -webkit-backdrop-filter: var(--blur-subtle);
+}
+
+.project-action-btn:hover {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-btn-hover); /* Vibrant neon cyan glow */
+  transform: translateY(-2px); /* Tactile lift effect */
+}
+
+/* ===================================================================
+   PROJECT DETAILED VIEW MODAL COMPONENT (ELEVATED BLUR & DROP SHADOW)
+   =================================================================== */
+
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Frosted Glass Backdrop
+   - Background blur: var(--blur-elevated) (24px) creates deep focus on modal
+   - Smooth dimming darkening page contents */
+.project-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.88);
+  backdrop-filter: var(--blur-elevated); /* Elevated background blur for focus */
+  -webkit-backdrop-filter: var(--blur-elevated);
+}
+
+.project-modal-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: var(--radius-xl);
+  scrollbar-width: thin;
+}
+
+/* Project Modal Floating Card
+   - Rounded corners: var(--radius-xl) (22px) for high-elevation focal dialog
+   - Drop shadow: ultra-deep 60px drop shadow + ambient neon cyan aura
+   - Parallax scale transition: subtle spring-in on open */
+.project-modal-card {
+  background: rgba(10, 16, 36, 0.94);
+  border: 2px solid rgba(0, 240, 255, 0.35);
+  border-radius: var(--radius-xl); /* Consistent 22px rounded corners */
+  padding: 2.25rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), var(--shadow-neon-cyan); /* Consistent elevated shadow */
+  backdrop-filter: var(--blur-elevated); /* Frosted glass effect */
+  -webkit-backdrop-filter: var(--blur-elevated);
+  transform: scale(0.94);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.project-modal.active .project-modal-card {
+  transform: scale(1);
+}
+
+/* Modal Close Button: Quick dismiss button
+   - Rounded corners: var(--radius-sm) (8px)
+   - Drop shadow: subtle edge shadow
+   - Hover transition: neon pink shift on danger/dismiss action */
+.modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm); /* Consistent 8px rounded corners */
+  box-shadow: var(--shadow-subtle); /* Drop shadow */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition-smooth); /* Smooth hover transition */
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 0, 127, 0.2);
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+  box-shadow: 0 0 16px rgba(255, 0, 127, 0.45); /* Neon pink alert glow */
+  transform: translateY(-1px); /* Tactile feedback */
+}
+
+.modal-header {
+  margin-bottom: 1.5rem;
+  padding-right: 4rem;
+}
+
+.modal-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0.45rem 0 0.3rem 0;
+}
+
+.modal-tagline {
+  font-size: 1.05rem;
+  color: var(--neon-cyan);
+  font-weight: 600;
+}
+
+.modal-thumbnail-banner {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  background: #040814;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 1.75rem;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.modal-banner-content {
+  width: 100%;
+  height: 100%;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.modal-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.modal-text {
+  font-size: 0.96rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.modal-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.modal-metric-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.modal-metric-val {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+}
+
+.modal-metric-lbl {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Light Theme Styling for Projects & Modal */
+[data-theme="light"] .project-filter-btn {
+  background: rgba(241, 245, 249, 0.9);
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+[data-theme="light"] .project-filter-btn.active {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: #0284c7;
+  color: #0284c7;
+}
+
+[data-theme="light"] .project-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .project-card:hover {
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 20px 35px -12px rgba(2, 132, 199, 0.2);
+}
+
+[data-theme="light"] .project-thumbnail {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .thumbnail-canvas {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+[data-theme="light"] .terminal-bar {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .project-modal-card {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(2, 132, 199, 0.35);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .modal-thumbnail-banner {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .modal-metric-card {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* ===================================================================
+   6. TESTIMONIALS SECTION (FROSTED GLASS CARDS & HOVER LIFT)
+   =================================================================== */
+
+.testimonials-section {
+  position: relative;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 2rem;
+}
+
+/* Testimonial Card Container
+   - Rounded corners: var(--radius-lg) (18px) uniform with project & about cards
+   - Background blur: var(--blur-card) (16px) creates frosted glass depth
+   - Drop shadow: var(--shadow-card) elevates social proof cards
+   - Hover transition: smooth upward translate with expanded aura */
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); /* Consistent 18px rounded corners */
+  padding: 2.25rem;
+  box-shadow: var(--shadow-card); /* Consistent drop shadow */
+  backdrop-filter: var(--blur-card); /* Frosted glass effect */
+  -webkit-backdrop-filter: var(--blur-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth); /* Smooth hover transition */
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px); /* Tactile lift effect */
+  border-color: var(--border-neon);
+  box-shadow: var(--shadow-card-hover); /* Expanded ambient cyan aura */
+}
+
+.testimonial-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.testimonial-quote-icon {
+  font-family: Georgia, serif;
+  font-size: 3.2rem;
+  line-height: 0.9;
+  color: var(--neon-cyan);
+  opacity: 0.65;
+  height: 30px;
+}
+
+.testimonial-meta-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.testimonial-stars {
+  color: #facc15;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 8px rgba(250, 204, 21, 0.4);
+}
+
+.verified-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--neon-emerald);
+  background: rgba(0, 255, 157, 0.1);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  letter-spacing: 0.04em;
+}
+
+.testimonial-text {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-style: italic;
+  position: relative;
+  z-index: 2;
+}
+
+.testimonial-author-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 800;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+
+.avatar-cyan {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.avatar-pink {
+  background: rgba(255, 0, 127, 0.14);
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
+}
+
+.avatar-purple {
+  background: rgba(168, 85, 247, 0.14);
+  border-color: #c084fc;
+  color: #c084fc;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+.avatar-emerald {
+  background: rgba(0, 255, 157, 0.14);
+  border-color: var(--neon-emerald);
+  color: var(--neon-emerald);
+  box-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.author-role {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neon-cyan);
+  margin-bottom: 0.2rem;
+}
+
+.author-context {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Light Theme Styling for Testimonials */
+[data-theme="light"] .testimonial-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .testimonial-card:hover {
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 20px 35px -12px rgba(2, 132, 199, 0.2);
+}
+
+[data-theme="light"] .testimonial-quote-icon {
+  color: #0284c7;
+}
+
+[data-theme="light"] .author-role {
+  color: #0284c7;
+}
+
+@media (max-width: 640px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-card {
+    padding: 1.6rem;
+    border-radius: 16px;
+  }
+}
+
+/* ===================================================================
+   7. INTERACTIVE AI CHAT SECTION ("ASK NEETHU AI")
+   =================================================================== */
+
+.ai-chat-section {
+  position: relative;
+}
+
+/* Chat Terminal Window Card Container
+   - Rounded corners: var(--radius-xl) (22px) for elevated focal app interface
+   - Background blur: var(--blur-elevated) (24px) creates deep frosted glass effect
+   - Drop shadow: deep card shadow + neon cyan halo
+   - Hover transition: smooth edge glow intensification */
+.chat-window-card {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl); /* Consistent 22px rounded corners */
+  box-shadow: var(--shadow-card), var(--shadow-neon-cyan); /* Consistent elevated drop shadow */
+  backdrop-filter: var(--blur-elevated); /* Frosted glass blur */
+  -webkit-backdrop-filter: var(--blur-elevated);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth); /* Smooth hover transition */
+}
+
+.chat-window-card:hover {
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: var(--shadow-card-hover), 0 0 32px rgba(0, 240, 255, 0.3); /* Intensified cyan aura */
+}
+
+/* Chat Terminal HUD Header */
+.chat-hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.75rem;
+  background: rgba(5, 8, 20, 0.88);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.chat-hud-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chat-hud-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--neon-emerald);
+  box-shadow: 0 0 8px var(--neon-emerald);
+  animation: hudPulse 2s infinite ease-in-out;
+}
+
+.chat-agent-name {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  display: block;
+}
+
+.chat-agent-sub {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  color: var(--neon-cyan);
+  letter-spacing: 0.04em;
+}
+
+.chat-hud-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.chat-model-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-xs);
+}
+
+/* Chat Reset Button
+   - Rounded corners: var(--radius-xs) (6px)
+   - Hover transition: smooth neon pink warning tint */
+.chat-reset-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-xs); /* Consistent 6px rounded corners */
+  cursor: pointer;
+  box-shadow: var(--shadow-subtle);
+  transition: var(--transition-smooth); /* Smooth hover transition */
+}
+
+.chat-reset-btn:hover {
+  color: var(--neon-pink);
+  border-color: var(--neon-pink);
+  background: rgba(255, 0, 127, 0.12);
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.3);
+}
+
+/* Quick Starter Prompts Strip */
+.chat-quick-prompts {
+  padding: 0.85rem 1.75rem;
+  background: rgba(255, 255, 255, 0.015);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.quick-prompts-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.quick-prompts-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Quick Prompt Pill Button
+   - Rounded corners: var(--radius-full) pill shape for starter suggestions
+   - Drop shadow: subtle edge shadow
+   - Hover transition: upward lift + cyan halo */
+.quick-prompt-btn {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(0, 240, 255, 0.05);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full); /* Fully rounded pill corners */
+  cursor: pointer;
+  box-shadow: var(--shadow-subtle); /* Drop shadow */
+  transition: var(--transition-smooth); /* Smooth hover transition */
+  outline: none;
+}
+
+.quick-prompt-btn:hover {
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.16);
+  transform: translateY(-2px); /* Tactile lift effect */
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.35); /* Neon cyan glow */
+}
+
+/* Message Display Area */
+.chat-display-area {
+  height: 380px;
+  overflow-y: auto;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  scrollbar-width: thin;
+}
+
+.chat-message {
+  display: flex;
+  gap: 0.85rem;
+  max-width: 88%;
+  animation: messageSlideIn 0.25s ease-out;
+}
+
+@keyframes messageSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message-ai {
+  align-self: flex-start;
+}
+
+.message-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+
+.message-ai .message-avatar {
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.message-user .message-avatar {
+  background: rgba(255, 0, 127, 0.12);
+  border: 1px solid var(--neon-pink);
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
+}
+
+/* Chat Message Bubbles
+   - Rounded corners: var(--radius-md) (12px)
+   - Background blur: frosted glass effect
+   - Drop shadow: subtle floating depth */
+.message-bubble {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md); /* Consistent 12px rounded corners */
+  position: relative;
+  backdrop-filter: var(--blur-subtle);
+  -webkit-backdrop-filter: var(--blur-subtle);
+}
+
+.message-ai .message-bubble {
+  background: rgba(14, 20, 42, 0.9);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  border-top-left-radius: 4px;
+  box-shadow: var(--shadow-subtle); /* Drop shadow */
+}
+
+.message-user .message-bubble {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(168, 85, 247, 0.2));
+  border: 1px solid var(--neon-cyan);
+  border-top-right-radius: 4px;
+  box-shadow: var(--shadow-subtle), 0 0 12px rgba(0, 240, 255, 0.15); /* Drop shadow */
+}
+
+.message-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.message-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+}
+
+.message-user .message-author {
+  color: var(--neon-pink);
+}
+
+.message-time {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.message-content {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.message-content p {
+  margin-bottom: 0.5rem;
+}
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.message-content strong {
+  color: #ffffff;
+}
+
+.message-content code {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: var(--neon-cyan);
+}
+
+/* Typing Indicator */
+.chat-typing-indicator {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0 1.75rem 1rem 1.75rem;
+  align-items: center;
+  animation: messageSlideIn 0.2s ease-out;
+}
+
+.typing-bubble {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14, 20, 42, 0.9);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  padding: 0.6rem 1rem;
+  border-radius: 14px;
+  border-top-left-radius: 4px;
+}
+
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+.typing-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-left: 0.4rem;
+}
+
+/* Chat Input Form */
+.chat-input-bar {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.15rem 1.75rem;
+  background: rgba(5, 8, 20, 0.95);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Chat Input Field
+   - Rounded corners: var(--radius-sm) (8px)
+   - Drop shadow: subtle inset shadow
+   - Focus transition: neon cyan outline glow */
+.chat-input-field {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); /* Consistent 8px rounded corners */
+  padding: 0.85rem 1.15rem;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth); /* Smooth focus transition */
+}
+
+.chat-input-field:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.2), 0 0 14px rgba(0, 240, 255, 0.25); /* Focus glow */
+  background: rgba(0, 240, 255, 0.02);
+}
+
+/* Chat Send Button
+   - Rounded corners: var(--radius-sm) (8px) uniform with other action buttons
+   - Drop shadow: var(--shadow-btn) bright neon cyan button glow
+   - Hover transition: tactile upward lift + intensified glow */
+.chat-send-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--neon-cyan);
+  color: #030712;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-sm); /* Consistent 8px rounded corners */
+  padding: 0 1.4rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn); /* Consistent drop shadow for primary buttons */
+  transition: var(--transition-smooth); /* Smooth hover transition */
+}
+
+.chat-send-btn:hover {
+  background: #38bdf8;
+  transform: translateY(-2px); /* Tactile lift effect */
+  box-shadow: var(--shadow-btn-hover); /* Expanded neon glow */
+}
+
+.chat-footer-note {
+  padding: 0.6rem 1.75rem;
+  background: rgba(3, 7, 18, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Light Theme Overrides for Chat */
+[data-theme="light"] .chat-window-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .chat-hud-header {
+  background: #f8fafc;
+  border-bottom-color: #e2e8f0;
+}
+
+[data-theme="light"] .chat-input-bar {
+  background: #f8fafc;
+  border-top-color: #e2e8f0;
+}
+
+[data-theme="light"] .chat-input-field {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .message-ai .message-bubble {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .message-user .message-bubble {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: #0284c7;
+}
+
+[data-theme="light"] .chat-footer-note {
+  background: #f8fafc;
+  border-top-color: #e2e8f0;
+}
+
+@media (max-width: 640px) {
+  .chat-display-area {
+    height: 320px;
+    padding: 1rem;
+  }
+
+  .chat-hud-header,
+  .chat-input-bar,
+  .chat-quick-prompts {
+    padding: 0.85rem 1rem;
+  }
+
+  .chat-message {
+    max-width: 95%;
+  }
+}
+
+/* ===================================================================
+   8. CONTACT SECTION
+   =================================================================== */
+.contact-section {
+  background-color: var(--bg-secondary);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+}
+
+.contact-info-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.contact-info-desc {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.contact-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.detail-icon {
+  font-size: 1.3rem;
+  background: var(--bg-card);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-value {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.detail-value:hover {
+  color: var(--accent-cyan);
+}
+
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.social-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+/* Contact Form */
+.contact-form-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* ===================================================================
+   FOOTER
+   =================================================================== */
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: 2.5rem 0;
+  background: var(--bg-primary);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.copyright-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.back-to-top {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.back-to-top:hover {
+  color: var(--accent-cyan);
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN SYSTEM & MEDIA QUERIES
+   Precise breakpoints:
+   - Desktop & Wide (1200px+)
+   - Tablet Landscape & Laptops (993px - 1200px)
+   - Tablet & Compact Viewports (769px - 992px) -> Vertical Navbar Trigger
+   - Mobile & Phablet (481px - 768px)
+   - Mobile Compact & Small Phones (<= 480px)
+   - Ultra-Compact Screens (<= 360px)
+   =================================================================== */
+
+/* -------------------------------------------------------------------
+   1. LAPTOP / LARGE TABLET VIEWPORTS (max-width: 1200px)
+   ------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 980px;
+  }
+
+  .neon-hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 2.75rem;
+  }
+
+  .neon-title {
+    font-size: 2.85rem;
+  }
+
+  .neon-avatar-wrapper {
+    width: 290px;
+  }
+
+  .neon-avatar-image {
+    height: 360px;
+  }
+
+  .about-grid-minimal {
+    gap: 2.5rem;
+  }
+
+  .pixel-skills-grid {
+    gap: 1.75rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 1.75rem;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 1.75rem;
+  }
+
+  .contact-grid {
+    gap: 2.75rem;
+  }
+}
+
+/* -------------------------------------------------------------------
+   2. TABLET VIEWPORTS (max-width: 992px)
+   - Vertical Navbar Activates Here
+   - 2-Column Section Grids Collapse Cleanly to 1 Column
+   ------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  /* Layout Spacing Rhythm */
+  .section {
+    padding: 4.75rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2.75rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+  }
+
+  /* =========================================================
+     VERTICAL NAVBAR DRAWER COMPONENT
+     Transforms horizontal menu into an elevated, glassmorphic
+     cybernetic vertical navigation panel with high touch targets.
+     ========================================================= */
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .nav-backdrop {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    background: rgba(6, 11, 28, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 2px solid var(--border-neon);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 240, 255, 0.15);
+    padding: 1.5rem 1.25rem 2rem 1.25rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-16px);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+  }
+
+  .nav-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    counter-reset: nav-counter;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 48px; /* Accessible minimum touch target */
+    padding: 0.85rem 1.25rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.25s ease;
+  }
+
+  /* Stylized Cybernetic Counter in Vertical Navbar */
+  .nav-link::before {
+    counter-increment: nav-counter;
+    content: counter(nav-counter, decimal-leading-zero) " // ";
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    margin-right: 0.75rem;
+    opacity: 0.8;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: rgba(0, 240, 255, 0.09);
+    border-color: var(--border-neon);
+    color: var(--neon-cyan);
+    transform: translateX(6px);
+    box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.08), 0 4px 15px rgba(0, 240, 255, 0.15);
+  }
+
+  .nav-link::after {
+    display: none; /* Disable horizontal desktop underline in vertical drawer */
+  }
+
+  /* Light Theme Vertical Navbar */
+  [data-theme="light"] .nav-menu {
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 2px solid rgba(2, 132, 199, 0.3);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+  }
+
+  [data-theme="light"] .nav-link {
+    color: var(--text-primary);
+    background: rgba(15, 23, 42, 0.025);
+    border-color: rgba(15, 23, 42, 0.06);
+  }
+
+  [data-theme="light"] .nav-link:hover,
+  [data-theme="light"] .nav-link.active {
+    background: rgba(2, 132, 199, 0.08);
+    border-color: rgba(2, 132, 199, 0.35);
+    color: #0284c7;
+  }
+
+  /* =========================================================
+     SECTION GRID LAYOUTS FOR TABLETS
+     ========================================================= */
+  /* Hero Section */
+  .hero-grid,
+  .neon-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  .hero-visual,
+  .neon-hero-visual {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .neon-avatar-wrapper {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .neon-avatar-image {
+    height: 340px;
+  }
+
+  /* About Section */
+  .about-grid,
+  .about-grid-minimal {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  .about-profile-card {
+    position: static;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .about-cards-split {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Skills Section */
+  .pixel-skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .skills-hud-strip {
+    gap: 0.85rem;
+    padding: 0.85rem 1.25rem;
+  }
+
+  /* Projects Section */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+
+  /* Testimonials Section */
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+
+  /* Contact Section */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  .contact-form-wrapper {
+    max-width: 100%;
+  }
+
+  /* Footer */
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+  }
+
+  .footer-left {
+    justify-content: center;
+  }
+}
+
+/* -------------------------------------------------------------------
+   3. MOBILE & PHABLET VIEWPORTS (max-width: 768px)
+   ------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 66px;
+  }
+
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .section {
+    padding: 3.75rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .section-title {
+    font-size: 1.85rem;
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+  }
+
+  /* Hero Section */
+  .neon-title {
+    font-size: 2.25rem;
+    line-height: 1.22;
+  }
+
+  .neon-subhead {
+    font-size: 1.2rem;
+  }
+
+  .neon-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .neon-hud-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .neon-status-pill,
+  .neon-toggle-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.74rem;
+  }
+
+  .neon-metrics-row {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .metric-num {
+    font-size: 1.25rem;
+  }
+
+  .metric-lbl {
+    font-size: 0.72rem;
+  }
+
+  .neon-metric-divider {
+    height: 32px;
+  }
+
+  .neon-cta-group {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .btn-neon-primary,
+  .btn-neon-secondary {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
+
+  .neon-avatar-wrapper {
+    max-width: 250px;
+  }
+
+  .neon-avatar-image {
+    height: 310px;
+  }
+
+  /* About Section */
+  .about-cards-split {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .about-stats-minimal {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .stat-divider {
+    width: 60px;
+    height: 1px;
+    margin: 0 auto;
+  }
+
+  /* Skills Section */
+  .skills-filter-bar {
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .skill-filter-btn {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.72rem;
+  }
+
+  .skills-hud-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .pixel-skill-card {
+    padding: 1.35rem;
+  }
+
+  /* Timeline Section */
+  .timeline-spine {
+    left: 14px;
+    width: 2px;
+  }
+
+  .timeline-marker-wrapper {
+    width: 30px;
+    padding-top: 1.3rem;
+  }
+
+  .timeline-marker {
+    width: 18px;
+    height: 18px;
+    border-width: 2px;
+  }
+
+  .marker-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .timeline-item {
+    gap: 1rem;
+  }
+
+  .timeline-card {
+    padding: 1.4rem 1.25rem;
+    border-radius: 16px;
+  }
+
+  .timeline-card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+  }
+
+  .timeline-role {
+    font-size: 1.15rem;
+  }
+
+  .timeline-achievements {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .achievement-pill {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .timeline-tags {
+    gap: 0.4rem;
+  }
+
+  /* Projects Section */
+  .projects-filter-bar {
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .project-filter-btn {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.72rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    padding: 1.35rem;
+    border-radius: 16px;
+  }
+
+  .project-thumbnail {
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-action-btn {
+    min-height: 44px;
+  }
+
+  /* Project Modal */
+  .project-modal {
+    padding: 1rem;
+  }
+
+  .project-modal-card {
+    padding: 1.35rem;
+    border-radius: 16px;
+  }
+
+  .modal-close-btn {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .modal-title {
+    font-size: 1.45rem;
+  }
+
+  .modal-tagline {
+    font-size: 0.92rem;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .modal-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Testimonials Section */
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .testimonial-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  /* AI Chat Section */
+  .chat-window-card {
+    border-radius: 16px;
+  }
+
+  .chat-hud-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .chat-hud-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .chat-quick-prompts {
+    padding: 0.75rem 1.25rem;
+    gap: 0.5rem;
+  }
+
+  .quick-prompt-btn {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .chat-display-area {
+    height: 330px;
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .chat-message {
+    max-width: 95%;
+  }
+
+  .message-bubble {
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .chat-input-bar {
+    padding: 0.85rem 1.25rem;
+    gap: 0.5rem;
+  }
+
+  .chat-input-field {
+    font-size: 16px; /* Prevents auto-zoom in mobile Safari */
+  }
+
+  .chat-send-btn {
+    padding: 0 1.1rem;
+    font-size: 0.78rem;
+  }
+
+  /* Contact Section */
+  .contact-form-wrapper {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px; /* Prevents auto-zoom in mobile Safari */
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .social-btn {
+    flex: 1 1 120px;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* -------------------------------------------------------------------
+   4. COMPACT MOBILE & SMALL PHONES (max-width: 480px)
+   ------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  :root {
+    --header-height: 62px;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .section {
+    padding: 2.85rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 1.85rem;
+  }
+
+  .section-title {
+    font-size: 1.65rem;
+  }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+  }
+
+  /* Brand Logo & Header Actions */
+  .brand-logo {
+    font-size: 1.15rem;
+  }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mobile-menu-toggle {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+  }
+
+  .hamburger-bar {
+    width: 18px;
+  }
+
+  /* Hero Section */
+  .neon-title {
+    font-size: 1.75rem;
+  }
+
+  .neon-subhead {
+    font-size: 1.05rem;
+  }
+
+  .neon-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .neon-avatar-wrapper {
+    max-width: 220px;
+  }
+
+  .neon-avatar-image {
+    height: 260px;
+  }
+
+  .neon-avatar-badge {
+    bottom: 0.6rem;
+    left: 0.6rem;
+    right: 0.6rem;
+    padding: 0.45rem 0.65rem;
+  }
+
+  .neon-badge-text {
+    font-size: 0.74rem;
+  }
+
+  .neon-metrics-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+    padding: 0.75rem 0.5rem;
+    text-align: center;
+  }
+
+  .neon-metric-divider {
+    display: none;
+  }
+
+  .metric-num {
+    font-size: 1.1rem;
+  }
+
+  .metric-lbl {
+    font-size: 0.65rem;
+    line-height: 1.25;
+  }
+
+  .neon-tags {
+    gap: 0.4rem;
+  }
+
+  .neon-chip {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  /* About Section */
+  .about-profile-img {
+    height: 240px;
+  }
+
+  .about-bio-card {
+    padding: 1.25rem;
+  }
+
+  .about-greeting {
+    font-size: 1.25rem;
+  }
+
+  .about-bio-lead {
+    font-size: 0.95rem;
+  }
+
+  .about-bio-text {
+    font-size: 0.88rem;
+  }
+
+  .highlight-card {
+    padding: 1.15rem;
+  }
+
+  .highlight-card-title {
+    font-size: 1.05rem;
+  }
+
+  .highlight-item {
+    font-size: 0.86rem;
+  }
+
+  .minimal-stat-num {
+    font-size: 1.45rem;
+  }
+
+  .minimal-stat-lbl {
+    font-size: 0.72rem;
+  }
+
+  /* Skills Section */
+  .skills-filter-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+  }
+
+  .skill-filter-btn {
+    width: 100%;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.66rem;
+    text-align: center;
+  }
+
+  .pixel-skill-card {
+    padding: 1.15rem;
+  }
+
+  .category-title {
+    font-size: 1.05rem;
+  }
+
+  .category-subtitle {
+    font-size: 0.68rem;
+  }
+
+  .skill-name {
+    font-size: 0.88rem;
+  }
+
+  .skill-lvl-tag {
+    font-size: 0.66rem;
+  }
+
+  .pixel-bar-container {
+    height: 14px;
+  }
+
+  /* Timeline Section */
+  .timeline-spine {
+    left: 8px;
+  }
+
+  .timeline-marker-wrapper {
+    width: 20px;
+    padding-top: 1rem;
+  }
+
+  .timeline-marker {
+    width: 14px;
+    height: 14px;
+  }
+
+  .marker-dot {
+    width: 4px;
+    height: 4px;
+  }
+
+  .timeline-item {
+    gap: 0.75rem;
+  }
+
+  .timeline-card {
+    padding: 1.1rem 0.9rem;
+  }
+
+  .timeline-role {
+    font-size: 1.05rem;
+  }
+
+  .timeline-company {
+    font-size: 0.78rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .timeline-tags .tag {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.45rem;
+  }
+
+  /* Projects Section */
+  .projects-filter-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+  }
+
+  .project-filter-btn {
+    width: 100%;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.66rem;
+    text-align: center;
+  }
+
+  .project-card {
+    padding: 1.1rem;
+  }
+
+  .project-title {
+    font-size: 1.15rem;
+  }
+
+  .project-desc {
+    font-size: 0.88rem;
+  }
+
+  .project-metric-row {
+    gap: 0.35rem;
+  }
+
+  .project-metric-item {
+    font-size: 0.66rem;
+    padding: 0.2rem 0.45rem;
+  }
+
+  .project-action-btn {
+    font-size: 0.72rem;
+    padding: 0.55rem 0.85rem;
+  }
+
+  /* Modal Details */
+  .project-modal-card {
+    padding: 1.1rem 0.9rem;
+    border-radius: 14px;
+  }
+
+  .modal-title {
+    font-size: 1.25rem;
+  }
+
+  .modal-tagline {
+    font-size: 0.85rem;
+  }
+
+  .modal-section-title {
+    font-size: 0.95rem;
+  }
+
+  .modal-text {
+    font-size: 0.85rem;
+  }
+
+  .modal-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  /* Testimonials Section */
+  .testimonial-card {
+    padding: 1.25rem;
+  }
+
+  .testimonial-quote-icon {
+    font-size: 2.25rem;
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 0.85rem;
+  }
+
+  .author-name {
+    font-size: 0.95rem;
+  }
+
+  .author-role {
+    font-size: 0.78rem;
+  }
+
+  /* AI Chat Section */
+  .chat-display-area {
+    height: 290px;
+    padding: 1rem 0.85rem;
+  }
+
+  .chat-agent-name {
+    font-size: 0.85rem;
+  }
+
+  .chat-agent-sub {
+    font-size: 0.58rem;
+  }
+
+  .chat-model-badge {
+    display: none;
+  }
+
+  .chat-reset-btn {
+    font-size: 0.66rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .message-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+
+  .message-bubble {
+    padding: 0.75rem 0.85rem;
+    border-radius: 12px;
+  }
+
+  .message-content {
+    font-size: 0.86rem;
+  }
+
+  .chat-input-bar {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .chat-send-btn {
+    padding: 0 0.85rem;
+    font-size: 0.75rem;
+  }
+
+  /* Contact Section */
+  .contact-info-title {
+    font-size: 1.25rem;
+  }
+
+  .contact-info-desc {
+    font-size: 0.9rem;
+  }
+
+  .contact-form-wrapper {
+    padding: 1.2rem;
+  }
+
+  .contact-form .btn {
+    padding: 0.85rem 1rem;
+    font-size: 0.92rem;
+  }
+
+  /* Footer */
+  .copyright-text {
+    font-size: 0.78rem;
+  }
+
+  .back-to-top {
+    font-size: 0.82rem;
+  }
+}
+
+/* -------------------------------------------------------------------
+   5. ULTRA-COMPACT SCREENS (max-width: 360px)
+   ------------------------------------------------------------------- */
+@media (max-width: 360px) {
+  .brand-logo {
+    font-size: 1.05rem;
+  }
+
+  .neon-title {
+    font-size: 1.55rem;
+  }
+
+  .neon-subhead {
+    font-size: 0.95rem;
+  }
+
+  .neon-metrics-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .skills-filter-bar,
+  .projects-filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .social-btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* -------------------------------------------------------------------
+   6. SHORT / LANDSCAPE MOBILE ORIENTATION
+   Ensures the vertical navbar and modal scroll smoothly on landscape phones.
+   ------------------------------------------------------------------- */
+@media (max-height: 520px) and (orientation: landscape) {
+  .nav-menu {
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    padding: 1rem 1.25rem;
+  }
+
+  .nav-list {
+    gap: 0.35rem;
+  }
+
+  .nav-link {
+    min-height: 40px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .project-modal-container {
+    max-height: 85vh;
+  }
+
+  .chat-display-area {
+    height: 220px;
+  }
+}
